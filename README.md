@@ -52,10 +52,10 @@ $ open terraform-visual-report/index.html
 
 ### Using [Docker](https://hub.docker.com/r/hieven/terraform-visual-cli)
 
-For people who likes Terraform Visual and wanto to integrate it into existing CI/CD pipeline.
+If you like Terraform Visual and want to integrate it into an existing CI/CD pipeline, you can use the provided Docker image.
 
-The Docker image is on top of offical Terraform + Terraform Visual CLI.
+The Docker image builds on top of the official Terraform image and includes Terraform Visual CLI.
 
-You can simply replace the Terraform image in your CI/CD piepline with this one and enjoy the benefit of both command line tools.
+Simply replace the Terraform image in your pipeline with this one to take advantage of both tools.
 
 For more details, please refer to [Docker: Terraform-Visual](https://hub.docker.com/r/hieven/terraform-visual-cli)
