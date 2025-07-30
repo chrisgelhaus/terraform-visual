@@ -5,7 +5,6 @@ import { PlanGraph } from '@app/components'
 import styles from '@app/components/plan-graph/plan-graph.module.css'
 import { Entities } from '@app/data'
 import React, { useEffect } from 'react'
-import ReactDOM from 'react-dom'
 
 interface Props {
   plan?: Entities.TerraformPlan
@@ -20,7 +19,7 @@ export const C = (props: Props) => {
   let graph: TreeGraph
 
   useEffect(() => {
-    if (!plan) {
+    if (!plan || !ref.current) {
       return
     }
 
@@ -34,7 +33,7 @@ export const C = (props: Props) => {
 
     graph = new G6.TreeGraph({
       // @ts-ignore
-      container: ReactDOM.findDOMNode(ref.current),
+      container: ref.current,
       width: ref?.current?.clientWidth || 0,
       height: 550, // TODO: customize
       linkCenter: true,
