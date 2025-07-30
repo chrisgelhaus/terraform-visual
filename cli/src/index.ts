@@ -1,6 +1,7 @@
 import { Command } from 'commander'
 import fs from 'fs-extra'
 import path from 'path'
+import open from './open'
 
 const TEMPLATE_DIR = path.resolve(__dirname, '../template')
 const TEMPLATE_DIST_PATH = path.resolve(TEMPLATE_DIR, 'dist')
@@ -19,10 +20,17 @@ async function main() {
   program.requiredOption('--plan <path>', 'set the relative path to Terraform plan')
   program.parse(process.argv)
 
-  // TODO: validation
+  // Validate inputs
   const inputOpts = program.opts() as InputOpts
   const outDirPath = path.resolve(callerPath, inputOpts.out, 'terraform-visual-report')
   const planFilePath = path.resolve(callerPath, inputOpts.plan)
+
+  try {
+    await fs.access(planFilePath, fs.constants.R_OK)
+  } catch (err) {
+    console.error(`Cannot read plan file: ${planFilePath}`)
+    process.exit(1)
+  }
 
   console.log(`outDirPath:   ${outDirPath}`)
   console.log(`planFilePath: ${planFilePath}`)
@@ -36,7 +44,11 @@ async function main() {
   const indexFilePath = path.resolve(outDirPath, 'index.html')
   console.log('')
   console.log('\x1b[32m%s\x1b[0m', 'Report generated successfully!')
-  console.log('\x1b[32m%s\x1b[0m', `Please run "open ${path.relative(callerPath, indexFilePath)}"`)
+  try {
+    await open(indexFilePath)
+  } catch (err) {
+    console.log('\x1b[33m%s\x1b[0m', `Failed to automatically open the report. Please open ${path.relative(callerPath, indexFilePath)} manually.`)
+  }
 }
 
 try {
