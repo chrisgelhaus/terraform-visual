@@ -1,6 +1,6 @@
 import { Navbar } from '@app/containers/_app'
 import styles from '@app/containers/_app/app.module.css'
-import { TerraofmrPlanProvider } from '@app/context/terraform-plan'
+import { TerraformPlanProvider } from '@app/context/terraform-plan'
 import { ReactGa } from '@app/utils/google-analytics'
 import Head from 'next/head'
 import { Router } from 'next/router'
@@ -30,13 +30,13 @@ export const C = ({ Component, pageProps }: any) => {
         />
       </Head>
 
-      <TerraofmrPlanProvider>
+      <TerraformPlanProvider>
         <Navbar.C />
 
         <div className={styles.container}>
           <Component {...pageProps} />
         </div>
-      </TerraofmrPlanProvider>
+      </TerraformPlanProvider>
     </>
   )
 }

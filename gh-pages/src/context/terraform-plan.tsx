@@ -32,7 +32,7 @@ const reducer = (state: State, action: Action<Entities.TerraformPlan>) => {
   }
 }
 
-export const TerraofmrPlanProvider = ({ children }: any) => {
+export const TerraformPlanProvider = ({ children }: any) => {
   const [state, Dispatch] = useReducer(reducer, {})
 
   return (
