@@ -18,7 +18,14 @@ test('cli generates report', async () => {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'tfvisual-'));
   const planPath = path.join(tmpDir, 'plan.json');
   fs.writeFileSync(planPath, '{}');
+
+  const templateDist = path.join(cliDir, 'template', 'dist');
+  fs.mkdirSync(templateDist, { recursive: true });
+  fs.writeFileSync(path.join(templateDist, 'index.html'), '<html></html>');
+
   await runCli(planPath, tmpDir);
+
+  fs.rmSync(templateDist, { recursive: true, force: true });
   const reportDir = path.join(tmpDir, 'terraform-visual-report');
   assert.ok(fs.existsSync(path.join(reportDir, 'index.html')));
   assert.ok(fs.existsSync(path.join(reportDir, 'plan.js')));
