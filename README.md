@@ -59,3 +59,15 @@ The Docker image builds on top of the official Terraform image and includes Terr
 Simply replace the Terraform image in your pipeline with this one to take advantage of both tools.
 
 For more details, please refer to [Docker: Terraform-Visual](https://hub.docker.com/r/hieven/terraform-visual-cli)
+
+## Running Tests
+
+To verify changes locally, install dependencies and run:
+
+```sh
+npm install --prefix cli
+npm test
+```
+
+This runs the CLI unit tests using Node\x27s built-in test runner.
+

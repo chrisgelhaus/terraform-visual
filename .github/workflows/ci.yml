@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'yarn'
+          cache-dependency-path: cli/yarn.lock
+      - name: Install dependencies
+        run: yarn --cwd cli install --frozen-lockfile
+      - name: Run tests
+        run: yarn --cwd cli test
