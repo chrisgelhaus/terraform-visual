@@ -35,7 +35,7 @@ export const C = (props: Props) => {
       // @ts-ignore
       container: ref.current,
       width: ref?.current?.clientWidth || 0,
-      height: 550, // TODO: customize
+      height: ref?.current?.clientHeight || 550,
       linkCenter: true,
       modes: {
         default: [
